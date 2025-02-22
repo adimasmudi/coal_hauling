@@ -46,6 +46,9 @@ Route::group(['prefix' => 'admin'], function(){
 
     Route::group(['prefix' => 'vehicle'], function(){
         Route::get("/", [VehicleController::class, 'index']);
+        Route::get("/add", [VehicleController::class, 'create']);
+
+        Route::post("/save", [VehicleController::class, 'save']);
     });
 
     Route::group(['prefix' => 'warehouse'], function(){

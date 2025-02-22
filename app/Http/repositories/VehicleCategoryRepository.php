@@ -21,6 +21,10 @@ class VehicleCategoryRepository
         $this->vehicleCategory = $vehicleCategory;
     }
 
+    public function getAll(){
+        return $this->vehicleCategory::all();
+    }
+
     public function showAll(){
         $vehicleCategory = $this->vehicleCategory::simplePaginate(10);
         return view('admin.vehicle_category.index', [
