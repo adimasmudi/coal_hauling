@@ -49,7 +49,8 @@ $.widget.bridge('uibutton', $.ui.button)
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
-  $(function(){
+  
+  $(document).ready(function(){
     $(document).on('click','#delete',function(e){
       e.preventDefault();
       var id = $(this).data('id');
@@ -58,13 +59,13 @@ $.widget.bridge('uibutton', $.ui.button)
 
       var link = $(this).attr("href");
       Swal.fire({
-        "title" : "Apakah kamu yakin?",
-        "text" : "kamu yakin ingin menghapus item ini?",
+        "title" : "Are you sure?",
+        "text" : "Are you sure want to delete this item?",
         "icon" : "warning",
         "showCancelButton" : true,
         "confirmButtonColor" : "#3085d6",
         "cancelButtonColor" : "#d33",
-        "confirmButtonText" : "Ya, hapus",
+        "confirmButtonText" : "Yes, delete",
       }).then((result)=>{
         if(result.isConfirmed){
           $(function() {
@@ -78,56 +79,13 @@ $.widget.bridge('uibutton', $.ui.button)
                 url: `{{url('/admin/${url}/${id}')}}`,
                 data : {_token: '{{csrf_token()}}'},
                 success: function (data) {
-                  Swal.fire('Item dihapus','Data yang dipilih sudah selesai dihapus','success');
+                  Swal.fire('Item deleted','Your selected item already deleted','success');
                   setTimeout(function(){
                     window.location.href = `{{url('/admin/${redirect}')}}`
                   },2000)
                 },
                 error : function (data, textStatus, errorThrown) {
-                  Swal.fire('Terjadi error',textStatus,'error');
-                },     
-            })});
-          
-        }
-      })
-      })
-
-      // verifikasi pembayaran
-      $(document).on('click','#verifikasiPembayaran',function(e){
-      e.preventDefault();
-      var id = $(this).data('id');
-      var url = $(this).data('url');
-      var redirect = $(this).data('redirect');
-
-      var link = $(this).attr("href");
-      Swal.fire({
-        "title" : "Apakah kamu yakin?",
-        "text" : "kamu yakin ingin ingin memverifikasi pemesanan ini?",
-        "icon" : "question",
-        "showCancelButton" : true,
-        "confirmButtonColor" : "#3085d6",
-        "cancelButtonColor" : "#d33",
-        "confirmButtonText" : "Ya, verifikasi",
-      }).then((result)=>{
-        if(result.isConfirmed){
-          $(function() {
-            $.ajaxSetup({
-              headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-            });
-            $.ajax({
-                type: "POST",
-                url: `{{url('/admin/${url}/${id}')}}`,
-                data : {_token: '{{csrf_token()}}'},
-                success: function (data) {
-                  Swal.fire('Pemesanan terverifikasi','Data pemesanan yang ada pilih berhasil diverifikasi','success');
-                  setTimeout(function(){
-                    window.location.href = `{{url('/admin/${redirect}')}}`
-                  },2000)
-                },
-                error : function (data, textStatus, errorThrown) {
-                  Swal.fire('Terjadi error',textStatus,'error');
+                  Swal.fire('An error occured', data.responseJSON?.error || textStatus, errorThrown);
                 },     
             })});
           

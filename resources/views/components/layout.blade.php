@@ -53,5 +53,5 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+  @include('sweetalert::alert')
 <x-footer />
