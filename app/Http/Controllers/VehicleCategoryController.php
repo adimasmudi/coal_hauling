@@ -75,7 +75,6 @@ class VehicleCategoryController extends Controller
 
     public function destroy(String $id)
     {
-        
         try {
             $this->vehicleCategoryService->delete($id);
         } catch (Exception $e) {

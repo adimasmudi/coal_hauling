@@ -31,9 +31,14 @@ class VehicleRepository
         ]);
     }
 
+    public function getVehicleById($id){
+        return $this->vehicle::where('id',$id)->with(['category','status'])->first();
+    }
+
     public function getVehicleStatusses(){
         return $this->vehicleStatusses::all();
     }
+
 
     public function save($data){
         $newData = new $this->vehicle;
@@ -52,5 +57,31 @@ class VehicleRepository
         $newData->save();
 
         return $newData->fresh();
+    }
+
+    public function update($data, $id){
+        $updateData = $this->vehicle::find($id);
+        $updateData->name = $data['name'];
+        $updateData->vehicle_category_id = $data['vehicle_category_id'];
+        $updateData->vehicle_status_id = $data['vehicle_status_id'];
+        $updateData->description = $data['description'];
+        $updateData->weight = $data['weight'];
+        $updateData->height = $data['height'];
+        $updateData->length = $data['length'];
+        $updateData->width = $data['width'];
+        $updateData->capacity = $data['capacity'];
+        $updateData->number_plate = $data['number_plate'];
+        $updateData->fuel_needed = $data['fuel_needed'];
+        $updateData->fuel_remaining = $data['fuel_remaining'];
+        $updateData->save();
+
+        return $updateData->fresh();
+    }
+
+    public function delete($id) : Object
+    {
+        $deleteData = $this->vehicle::findOrfail($id);
+        $deleteData->delete();
+        return $deleteData;
     }
 }

@@ -2,7 +2,7 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           <a href="/admin/vehicle/add" class="btn btn-primary w-25 mb-3">Add</a>
           <div class="card">
           @if($vehicles)
@@ -33,9 +33,12 @@
                         <img src="{{asset('storage/'. $vhc->image_path)}}" alt="" width="100px">              
                       </td>
                       <td>{{$vhc->category->name}}</td>
-                      <td>{{$vhc->status->name}}</td>
+                      <td>{{str_replace("_"," ",$vhc->status->name)}}</td>
                       <td>{{$vhc->last_time_service}}</td>
                       <td class="d-flex flex-row">
+                        <a href="/admin/vehicle/show/{{$vhc->id}}" class="btn btn-primary mx-2">
+                          detail
+                        </a>
                         <a href="/admin/vehicle/edit/{{$vhc->id}}" class="btn btn-warning mx-2">
                             <i class="fas fa-edit"></i>
                         </a>

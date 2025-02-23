@@ -46,9 +46,13 @@ Route::group(['prefix' => 'admin'], function(){
 
     Route::group(['prefix' => 'vehicle'], function(){
         Route::get("/", [VehicleController::class, 'index']);
+        Route::get("/show/{id}", [VehicleController::class, 'show']);
         Route::get("/add", [VehicleController::class, 'create']);
+        Route::get("/edit/{id}", [VehicleController::class, 'edit']);
 
         Route::post("/save", [VehicleController::class, 'save']);
+        Route::post("/update/{id}", [VehicleController::class, 'update']);
+        Route::post("/delete/{id}", [VehicleController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'warehouse'], function(){
