@@ -20,12 +20,14 @@ Route::group(['prefix' => 'admin'], function(){
 
     Route::group(['prefix' => 'delivery'], function(){
         Route::get("/", [DeliveryController::class, 'index']);
+        Route::get("/show/{id}", [DeliveryController::class, 'show']);
         Route::get("/add", [DeliveryController::class, 'create']);
         Route::get("/edit/{id}", [DeliveryController::class, 'edit']);
 
         Route::post("/save", [DeliveryController::class, 'save']);
         Route::post("/update/{id}", [DeliveryController::class, 'update']);
         Route::post("/delete/{id}", [DeliveryController::class, 'destroy']);
+        Route::post("/{delivery_id}/vehicle-delivery/{vehicle_delivery_id}/status/update", [DeliveryController::class, 'deliveryStatusUpdate']);
         
         Route::group(['prefix' => 'assign'], function(){
             Route::get("/add", [DeliveryController::class, 'createAssign']);

@@ -20,6 +20,10 @@ class DeliveryController extends Controller
         return $this->deliveryService->showAll();
     }
 
+    public function show(string $id){
+        return $this->deliveryService->show($id);
+    }
+
     public function create(){
         return view("admin.delivery.create");
     }
@@ -72,6 +76,19 @@ class DeliveryController extends Controller
         }
 
         return response()->json(['message' => 'Success delete item'], 200);
+    }
+
+    public function deliveryStatusUpdate(Request $request, string $delivery_id, string $vehicle_delivery_id){
+        $data = $request->all();
+        try {
+            $this->deliveryService->deliveryUpdateStatus($data, $vehicle_delivery_id);
+            Alert::success("Success update delivery","Delivery data updated successfully");
+        } catch (Exception $e) {
+            Alert::error("Error update delivery",$e->getMessage());
+            return back();
+        }
+
+        return redirect("/admin/delivery/show/".$delivery_id);
     }
 
     public function deliver(){

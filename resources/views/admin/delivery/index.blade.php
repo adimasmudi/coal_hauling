@@ -28,14 +28,14 @@
                                     <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                        <th style="width: 10px">id</th>
-                                        <th>Vehicle Name</th>
-                                        <th>Vehicle Number</th>
-                                        <th>Delivery ID</th>
-                                        <th>Delivery Status</th>
-                                        <th>Created At</th>
-                                        <th>Last Updated</th>
-                                        <th>Action</th>
+                                            <th style="width: 10px">id</th>
+                                            <th>Vehicle Name</th>
+                                            <th>Vehicle Number</th>
+                                            <th>Delivery ID</th>
+                                            <th>Delivery Status</th>
+                                            <th>Created At</th>
+                                            <th>Last Updated</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

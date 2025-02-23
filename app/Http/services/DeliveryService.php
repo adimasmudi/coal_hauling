@@ -29,6 +29,10 @@ class DeliveryService
         return $this->deliveryRepository->showAll();
     }
 
+    public function show($id){
+        return $this->deliveryRepository->show($id);
+    }
+
     public function edit($id){
         return $this->deliveryRepository->edit($id);
     }
@@ -88,6 +92,19 @@ class DeliveryService
         } catch (Exception $e) {
             throw new InvalidArgumentException("Error Delete Data");
         }
+        return $result;
+    }
+
+    public function deliveryUpdateStatus($data, $id){
+        $validator = Validator::make($data,[
+            'delivery_status_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            throw new InvalidArgumentException($validator->errors()->first());
+        }
+
+        $result = $this->deliveryRepository->deliveryUpdateStatus($data,$id);
         return $result;
     }
 

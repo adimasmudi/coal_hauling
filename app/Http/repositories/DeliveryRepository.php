@@ -48,6 +48,17 @@ class DeliveryRepository
         return $this->delivery::all();
     }
 
+    public function show($id){
+        $delivery = $this->delivery::where('id', $id)
+            ->with(['vehicleDeliveries.vehicle', 'vehicleDeliveries.status']) 
+            ->first();
+        $deliveryStatusses = $this->deliveryStatusses::where('id','<>',3)->get();
+        return view("admin.delivery.show",[
+            "delivery" => $delivery,
+            "delivery_status" => $deliveryStatusses
+        ]);
+    }
+
     public function getDeliveryStatusIdByName($name){
         return $this->deliveryStatusses::where('name',$name)->first();
     }
@@ -79,6 +90,14 @@ class DeliveryRepository
 
     public function getAssignedDeliveryById($id){
         return $this->vehicleDelivery::with(['vehicle'])->where("id",$id)->first();
+    }
+
+    public function deliveryUpdateStatus($data,$id){
+        $updateData = $this->vehicleDelivery::find($id);
+        $updateData->delivery_status_id = $data['delivery_status_id'];
+        $updateData->save();
+
+        return $updateData->fresh();
     }
 
     public function deliverAll(){
