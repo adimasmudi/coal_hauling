@@ -50,6 +50,13 @@ Route::group(['prefix' => 'admin'], function(){
 
     Route::group(['prefix' => 'partner'], function(){
         Route::get("/", [PartnerController::class, 'index']);
+        Route::get("/add", [PartnerController::class, 'create']);
+        Route::get("/edit/{id}", [PartnerController::class, 'edit']);
+        
+        Route::post("/save", [PartnerController::class, 'save']);
+        Route::post("/update/{id}", [PartnerController::class, 'update']);
+        Route::post("/delete/{id}", [PartnerController::class, 'destroy']);
+
     });
 
     Route::group(['prefix' => 'vehicle-category'], function(){
