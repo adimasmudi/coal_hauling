@@ -16,7 +16,7 @@ class VehicleController extends Controller
         $this->vehicleService = $vehicleService;
     }
     public function index(){
-        return view('admin.vehicle.index');
+        return $this->vehicleService->showAll();
     }
 
     public function create(){

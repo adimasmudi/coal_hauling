@@ -24,6 +24,13 @@ class VehicleRepository
         $this->vehicleStatusses = $vehicleStatusses;
     }
 
+    public function showAll(){
+        $vehicles = $this->vehicle::with(['category','status'])->simplePaginate(10);
+        return view('admin.vehicle.index', [
+            'vehicles' => $vehicles
+        ]);
+    }
+
     public function getVehicleStatusses(){
         return $this->vehicleStatusses::all();
     }

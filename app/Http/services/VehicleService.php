@@ -20,6 +20,10 @@ class VehicleService
         $this->vehicleCategoryRepository = $vehicleCategoryRepository;
     }
 
+    public function showAll(){
+        return $this->vehicleRepository->showAll();
+    }
+
     public function create(){
         $vehicleCategories = $this->vehicleCategoryRepository->getAll();
         $vehicleStatusses = $this->vehicleRepository->getVehicleStatusses();
