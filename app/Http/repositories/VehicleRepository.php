@@ -39,6 +39,16 @@ class VehicleRepository
         return $this->vehicleStatusses::all();
     }
 
+    public function getAvailableVehicle(){
+        return $this->vehicle::with(['category','status'])
+            ->whereHas('status', function ($query) {
+                $query->where('name', 'available');
+            })
+            ->whereHas('category', function ($query) {
+                $query->where('id', 1);
+            })
+            ->get();
+    }
 
     public function save($data){
         $newData = new $this->vehicle;
@@ -73,6 +83,26 @@ class VehicleRepository
         $updateData->number_plate = $data['number_plate'];
         $updateData->fuel_needed = $data['fuel_needed'];
         $updateData->fuel_remaining = $data['fuel_remaining'];
+        $updateData->save();
+
+        return $updateData->fresh();
+    }
+
+    public function changeAllAssignedAsAvailable(){
+        return $this->vehicle::where('vehicle_status_id', 3)->update(['vehicle_status_id' => 1]);
+    }
+
+    public function changeAsAssigned($id){
+        $updateData = $this->vehicle::find($id);
+        $updateData->vehicle_status_id = 3;
+        $updateData->save();
+
+        return $updateData->fresh();
+    }
+
+    public function changeAsAvailable($id){
+        $updateData = $this->vehicle::find($id);
+        $updateData->vehicle_status_id = 1;
         $updateData->save();
 
         return $updateData->fresh();

@@ -20,6 +20,21 @@ Route::group(['prefix' => 'admin'], function(){
 
     Route::group(['prefix' => 'delivery'], function(){
         Route::get("/", [DeliveryController::class, 'index']);
+        Route::get("/add", [DeliveryController::class, 'create']);
+        Route::get("/edit/{id}", [DeliveryController::class, 'edit']);
+
+        Route::post("/save", [DeliveryController::class, 'save']);
+        Route::post("/update/{id}", [DeliveryController::class, 'update']);
+        Route::post("/delete/{id}", [DeliveryController::class, 'destroy']);
+        
+        Route::group(['prefix' => 'assign'], function(){
+            Route::get("/add", [DeliveryController::class, 'createAssign']);
+            Route::get("/edit/{id}", [DeliveryController::class, 'editAssign']);
+            
+            Route::post("/save", [DeliveryController::class, 'saveAssign']);
+            Route::post("/update/{id}", [DeliveryController::class, 'updateAssign']);
+            Route::post("/delete/{id}", [DeliveryController::class, 'destroyAssign']);
+        });
     });
 
     Route::group(['prefix' => 'department'], function(){
