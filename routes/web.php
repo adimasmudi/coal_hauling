@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin'], function(){
             Route::get("/add", [DeliveryController::class, 'createAssign']);
             Route::get("/edit/{id}", [DeliveryController::class, 'editAssign']);
             
+            Route::post("/deliver", [DeliveryController::class, 'deliver']);
             Route::post("/save", [DeliveryController::class, 'saveAssign']);
             Route::post("/update/{id}", [DeliveryController::class, 'updateAssign']);
             Route::post("/delete/{id}", [DeliveryController::class, 'destroyAssign']);

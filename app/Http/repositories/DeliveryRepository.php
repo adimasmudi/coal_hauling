@@ -81,6 +81,10 @@ class DeliveryRepository
         return $this->vehicleDelivery::with(['vehicle'])->where("id",$id)->first();
     }
 
+    public function deliverAll(){
+        return $this->vehicleDelivery::where('delivery_status_id', 3)->update(['delivery_status_id' => 2]);
+    }
+
     public function saveAssign($data){
         $newData = new $this->vehicleDelivery;
         $newData->vehicle_id = $data['vehicle_id'];

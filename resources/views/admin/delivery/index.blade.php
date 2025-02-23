@@ -15,7 +15,7 @@
                     <div class="active tab-pane" id="assigned">
                         <div>
                             <a href="/admin/delivery/assign/add" class="btn btn-primary w-25 mb-3">Assign New</a>
-                            <a href="/admin/delivery/deliverAll" class="btn btn-primary w-25 mb-3">Deliver All</a>
+                            <button class="deliver-all btn btn-primary w-25 mb-3" @if(count($assigned) < 1) disabled @endif>Deliver All</button>
                         </div>
                         <div class="card">
                             @if($assigned)

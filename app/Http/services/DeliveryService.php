@@ -83,14 +83,21 @@ class DeliveryService
 
     public function delete($id)
     {
-
         try {
             $result = $this->deliveryRepository->delete($id);
         } catch (Exception $e) {
             throw new InvalidArgumentException("Error Delete Data");
         }
         return $result;
+    }
 
+    public function deliverAll(){
+        try {
+            $result = $this->deliveryRepository->deliverAll();
+        } catch (Exception $e) {
+            throw new InvalidArgumentException("Unable to deliver all");
+        }
+        return $result;
     }
 
     public function saveAssign($data){

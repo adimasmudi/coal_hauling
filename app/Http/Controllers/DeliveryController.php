@@ -74,6 +74,18 @@ class DeliveryController extends Controller
         return response()->json(['message' => 'Success delete item'], 200);
     }
 
+    public function deliver(){
+        try {
+            $this->deliveryService->deliverAll();
+            Alert::success("Success","Success deliver using assigned vehicles");
+        } catch (Exception $e) {
+            Alert::error("Error deliver all",$e->getMessage());
+            return back();
+        }
+
+        return redirect("/admin/delivery");
+    }
+
     public function saveAssign(Request $request){
         $data = $request->all();
 

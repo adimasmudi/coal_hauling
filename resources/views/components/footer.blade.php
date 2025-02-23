@@ -93,6 +93,45 @@ $.widget.bridge('uibutton', $.ui.button)
       })
       })
 
+      // deliver all
+      $(document).on('click','.deliver-all',function(e){
+      e.preventDefault();
+
+      Swal.fire({
+        "title" : "Are you sure?",
+        "text" : "Are you sure want to deliver all using assigned vehicles?",
+        "icon" : "warning",
+        "showCancelButton" : true,
+        "confirmButtonColor" : "#3085d6",
+        "cancelButtonColor" : "#d33",
+        "confirmButtonText" : "Yes, deliver",
+      }).then((result)=>{
+        if(result.isConfirmed){
+          $(function() {
+            $.ajaxSetup({
+              headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            $.ajax({
+                type: "POST",
+                url: `{{url('/admin/delivery/assign/deliver')}}`,
+                data : {_token: '{{csrf_token()}}'},
+                success: function (data) {
+                  Swal.fire('Delivered','Deliver all success','success');
+                  setTimeout(function(){
+                    window.location.href = `{{url('/admin/delivery')}}`
+                  },2000)
+                },
+                error : function (data, textStatus, errorThrown) {
+                  Swal.fire('An error occured', data.responseJSON?.error || textStatus, errorThrown);
+                },     
+            })});
+          
+        }
+      })
+      })
+
       // delete image
       $(document).on('click','#deleteImage',function(e){
       e.preventDefault();
