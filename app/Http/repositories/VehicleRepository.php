@@ -25,7 +25,7 @@ class VehicleRepository
     }
 
     public function showAll(){
-        $vehicles = $this->vehicle::with(['category','status'])->simplePaginate(10);
+        $vehicles = $this->vehicle::with(['category','status'])->orderBy('updated_at','DESC')->simplePaginate(10);
         return view('admin.vehicle.index', [
             'vehicles' => $vehicles
         ]);

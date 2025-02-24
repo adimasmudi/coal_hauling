@@ -22,7 +22,7 @@ class PartnerRepository
     }
 
     public function showAll(){
-        $partners = $this->partner::simplePaginate();
+        $partners = $this->partner::orderBy('updated_at','DESC')->simplePaginate();
         return view('admin.partner.index',[
             "partners" => $partners
         ]);

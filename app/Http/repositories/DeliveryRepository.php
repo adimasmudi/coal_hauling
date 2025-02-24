@@ -29,8 +29,8 @@ class DeliveryRepository
 
     public function showAll(){
         $deliveryStatus = $this->getDeliveryStatusIdByName("ready");
-        $assigned = $this->vehicleDelivery::with(['vehicle','status'])->where("delivery_status_id",$deliveryStatus->id)->simplePaginate(10);
-        $deliveries = $this->delivery::simplePaginate(10);
+        $assigned = $this->vehicleDelivery::with(['vehicle','status'])->where("delivery_status_id",$deliveryStatus->id)->orderBy('updated_at','DESC')->simplePaginate(10);
+        $deliveries = $this->delivery::orderBy('updated_at','DESC')->simplePaginate(10);
         return view('admin.delivery.index',[
             "assigned" => $assigned,
             "deliveries" => $deliveries

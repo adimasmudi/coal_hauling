@@ -21,7 +21,7 @@ class WarehouseRepository
     }
 
     public function showAll(){
-        $spareParts = $this->sparePart::simplePaginate(10);
+        $spareParts = $this->sparePart::orderBy('updated_at','DESC')->simplePaginate(10);
         return view('admin.warehouse.index',[
             'spare_parts' => $spareParts
         ]);
