@@ -37,19 +37,9 @@ class VehicleController extends Controller
         try {
             
             $this->vehicleService->save($data);
-            
-            // if($data['file'] != []){
-            //     $image = [
-            //         'id_tempat' => $result['data']->id,
-            //         'kategori_id' => $result['data']->kategori_id,
-            //         'file' => $data['file']
-            //     ];
-            //     $result['file'] = $this->fileService->store($image);
-            // }
-            Alert::success("Success add vehicle","Vehicle add successfully");
+            Alert::success("Success","Vehicle add successfully");
         } catch (Exception $e) {
-           
-            Alert::error("Error add vehicle",$e->getMessage());
+            Alert::error("Error","Error add vehicle");
             return back();
         }
 
@@ -61,18 +51,9 @@ class VehicleController extends Controller
         try {
             
             $this->vehicleService->update($data, $id);
-            
-            // if($data['file'] != []){
-            //     $image = [
-            //         'id_tempat' => $result['data']->id,
-            //         'kategori_id' => $result['data']->kategori_id,
-            //         'file' => $data['file']
-            //     ];
-            //     $result['file'] = $this->fileService->store($image);
-            // }
             Alert::success("Success","Vehicle data updated");
         } catch (Exception $e) {
-            Alert::error("Error",$e->getMessage());
+            Alert::error("Error","Error update vehicle");
             return back();
         }
 
@@ -84,7 +65,7 @@ class VehicleController extends Controller
         try {
             $this->vehicleService->delete($id);
         } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to delete item: ' . $e->getMessage()], 500);
+            return response()->json(['error' => 'Failed to delete item'], 500);
         }
 
         return response()->json(['message' => 'Success delete item'], 200);

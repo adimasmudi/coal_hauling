@@ -45,9 +45,9 @@ class DeliveryController extends Controller
 
         try {
             $this->deliveryService->save($data);
-            Alert::success("Success add new delivery","New delivery successfully added");
+            Alert::success("Success","New delivery successfully added");
         } catch (Exception $e) {
-            Alert::error("Error add delivery",$e->getMessage());
+            Alert::error("Error","Error add delivery");
             return back();
         }
 
@@ -58,9 +58,9 @@ class DeliveryController extends Controller
         $data = $request->all();
         try {
             $this->deliveryService->update($data, $id);
-            Alert::success("Success update delivery","Delivery data updated successfully");
+            Alert::success("Success","Delivery data updated successfully");
         } catch (Exception $e) {
-            Alert::error("Error update delivery",$e->getMessage());
+            Alert::error("Error","Error update delivery");
             return back();
         }
 
@@ -72,7 +72,7 @@ class DeliveryController extends Controller
         try {
             $this->deliveryService->delete($id);
         } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to delete item: ' . $e->getMessage()], 500);
+            return response()->json(['error' => 'Failed to delete item'], 500);
         }
 
         return response()->json(['message' => 'Success delete item'], 200);
@@ -82,9 +82,9 @@ class DeliveryController extends Controller
         $data = $request->all();
         try {
             $this->deliveryService->deliveryUpdateStatus($data, $vehicle_delivery_id);
-            Alert::success("Success update delivery","Delivery data updated successfully");
+            Alert::success("Success","Delivery data updated successfully");
         } catch (Exception $e) {
-            Alert::error("Error update delivery",$e->getMessage());
+            Alert::error("Error","Error update delivery");
             return back();
         }
 
@@ -96,7 +96,7 @@ class DeliveryController extends Controller
             $this->deliveryService->deliverAll();
             Alert::success("Success","Success deliver using assigned vehicles");
         } catch (Exception $e) {
-            Alert::error("Error deliver all",$e->getMessage());
+            Alert::error("Error","Error deliver all");
             return back();
         }
 
@@ -110,7 +110,7 @@ class DeliveryController extends Controller
             $this->deliveryService->saveAssign($data);
             Alert::success("Success","Success assign new vehicle");
         } catch (Exception $e) {
-            Alert::error("Error assign vehicle",$e->getMessage());
+            Alert::error("Error","Error assign vehicle");
             return back();
         }
 
@@ -124,7 +124,7 @@ class DeliveryController extends Controller
             $this->deliveryService->updateAssign($data,$id);
             Alert::success("Success","Success update assigned");
         } catch (Exception $e) {
-            Alert::error("Error update assign vehicle",$e->getMessage());
+            Alert::error("Error","Error update assign vehicle");
             return back();
         }
 
@@ -136,7 +136,7 @@ class DeliveryController extends Controller
         try {
             $this->deliveryService->deleteAssign($id);
         } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to delete item: ' . $e->getMessage()], 500);
+            return response()->json(['error' => 'Failed to delete item'], 500);
         }
 
         return response()->json(['message' => 'Success delete item'], 200);

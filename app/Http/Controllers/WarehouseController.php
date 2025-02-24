@@ -38,11 +38,10 @@ class WarehouseController extends Controller
     public function save(Request $request){
         $data = $request->all();
         try {
-            
             $this->warehouseService->save($data);
             Alert::success("Success","Success Add New Sparepart");
         } catch (Exception $e) {
-            Alert::error("Error",$e->getMessage());
+            Alert::error("Error","Error add new sparepart");
             return back();
         }
 
@@ -52,11 +51,10 @@ class WarehouseController extends Controller
     public function update(Request $request, string $id){
         $data = $request->all();
         try {
-            
             $this->warehouseService->update($data, $id);
-            Alert::success("Success","Success update spare part");
+            Alert::success("Success","Success update sparepart");
         } catch (Exception $e) {
-            Alert::error("Error",$e->getMessage());
+            Alert::error("Error","Error update sparepart");
             return back();
         }
 
@@ -68,7 +66,7 @@ class WarehouseController extends Controller
         try {
             $this->warehouseService->delete($id);
         } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to delete item: ' . $e->getMessage()], 500);
+            return response()->json(['error' => 'Failed to delete item'], 500);
         }
 
         return response()->json(['message' => 'Success delete item'], 200);
@@ -81,7 +79,7 @@ class WarehouseController extends Controller
             $this->warehouseService->saveSupply($data,$id);
             Alert::success("Success","Success Supply Sparepart");
         } catch (Exception $e) {
-            Alert::error("Error",$e->getMessage());
+            Alert::error("Error","Error supply sparepart");
             return back();
         }
 
@@ -93,7 +91,7 @@ class WarehouseController extends Controller
         try {
             $this->warehouseService->deleteSupply($id, $supply_id);
         } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to delete item: ' . $e->getMessage()], 500);
+            return response()->json(['error' => 'Failed to delete item'], 500);
         }
 
         return response()->json(['message' => 'Success delete item'], 200);

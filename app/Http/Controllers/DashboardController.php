@@ -39,7 +39,7 @@ class DashboardController extends Controller
             $request->session()->regenerate();
             Alert::success("Success","Success Login");
         } catch (Exception $e) {
-            Alert::error("Error",$e->getMessage());
+            Alert::error("Error","Unable to login");
             return back();
         }
 

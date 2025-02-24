@@ -34,7 +34,7 @@ class PartnerController extends Controller
             $this->partnerService->save($data);
             Alert::success("Success","Success Add New Partner");
         } catch (Exception $e) {
-            Alert::error("Error",$e->getMessage());
+            Alert::error("Error","Error add new partner");
             return back();
         }
 
@@ -48,7 +48,7 @@ class PartnerController extends Controller
             $this->partnerService->update($data, $id);
             Alert::success("Success","Success update partner");
         } catch (Exception $e) {
-            Alert::error("Error",$e->getMessage());
+            Alert::error("Error","Error update partner");
             return back();
         }
 
@@ -60,7 +60,7 @@ class PartnerController extends Controller
         try {
             $this->partnerService->delete($id);
         } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to delete item: ' . $e->getMessage()], 500);
+            return response()->json(['error' => 'Failed to delete item'], 500);
         }
 
         return response()->json(['message' => 'Success delete item'], 200);
