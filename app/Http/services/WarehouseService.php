@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Http\Repositories\WarehouseRepository;
+use App\Models\SparePart;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 use InvalidArgumentException;
@@ -21,8 +22,16 @@ class WarehouseService
         return $this->warehouseRepository->showAll();
     }
 
+    public function show($id){
+        return $this->warehouseRepository->show($id);
+    }
+
     public function showEdit($id){
         return $this->warehouseRepository->showEdit($id);
+    }
+
+    public function createSupply($id){
+        return $this->warehouseRepository->createSupply($id);
     }
 
     public function save($data){
@@ -62,6 +71,38 @@ class WarehouseService
             throw new InvalidArgumentException("Error Delete Data");
         }
         return $result;
+    }
 
+    public function saveSupply($data,$id){
+        $validator = Validator::make($data,[
+            'partner_id' => 'required',
+            'quantity' => 'numeric|min:1',
+            'note' => 'max:255'
+        ]);
+
+        if ($validator->fails()) {
+            throw new InvalidArgumentException($validator->errors()->first());
+        }
+
+        $data['spare_part_id'] = $id;
+        $result = $this->warehouseRepository->saveSupply($data);
+        $this->warehouseRepository->increaseSparePartQuantity($id, $data['quantity']);
+        return $result;
+    }
+
+    public function deleteSupply($id, $supply_id)
+    {
+        try {
+            $sparePart = $this->warehouseRepository->getSparePartById($id);
+            if (!$sparePart){
+                throw new InvalidArgumentException("Sparepart not found");
+            }
+
+            $result = $this->warehouseRepository->deleteSupply($supply_id);
+            $this->warehouseRepository->descreaseSparePartQuantity($sparePart->id,$result->quantity);
+        } catch (Exception $e) {
+            throw new InvalidArgumentException("Error Delete Data");
+        }
+        return $result;
     }
 }

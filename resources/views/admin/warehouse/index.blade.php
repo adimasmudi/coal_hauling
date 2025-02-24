@@ -30,6 +30,9 @@
                       <td>{{$sprt->image_path}}</td>
                       <td>{{$sprt->quantity}}</td>
                       <td class="d-flex flex-row">
+                        <a href="/admin/warehouse/show/{{$sprt->id}}" class="btn btn-primary mx-2">
+                            detail
+                        </a>
                         <a href="/admin/warehouse/edit/{{$sprt->id}}" class="btn btn-warning mx-2">
                             <i class="fas fa-edit"></i>
                         </a>

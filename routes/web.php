@@ -87,12 +87,20 @@ Route::group(['prefix' => 'admin'], function(){
     
         Route::group(['prefix' => 'warehouse'], function(){
             Route::get("/", [WarehouseController::class, 'index']);
+            Route::get("/show/{id}", [WarehouseController::class, 'show']);
             Route::get("/add", [WarehouseController::class, 'create']);
             Route::get("/edit/{id}", [WarehouseController::class, 'edit']);
             
             Route::post("/save", [WarehouseController::class, 'save']);
             Route::post("/update/{id}", [WarehouseController::class, 'update']);
             Route::post("/delete/{id}", [WarehouseController::class, 'destroy']);
+
+            Route::group(['prefix' => '/{id}/supply'], function(){
+                Route::get("/add", [WarehouseController::class, 'createSupply']);
+                
+                Route::post("/save", [WarehouseController::class, 'saveSupply']);
+                Route::post("/delete/{supply_id}", [WarehouseController::class, 'destroySupply']);
+            });
         });
     });
 
