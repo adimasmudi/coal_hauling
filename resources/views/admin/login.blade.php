@@ -7,7 +7,7 @@
       </div>
       <!-- /.card-header -->
       <!-- form start -->
-      <form class="form-horizontal" method="POST" action="/admin/processLogin">
+      <form class="form-horizontal" method="POST" action="/admin/authenticate">
         @csrf
         <div class="card-body">
           <div class="form-group row">
@@ -39,5 +39,4 @@
       </form>
     </div>
   </div>
- 
 <x-footer />
