@@ -11,6 +11,10 @@
 
 Admin dashboard for Coal Hauling company that can make admin can manage all resource inside the company from vehicles, delivery management, supply chain, etc.
 
+# Tech stack
+
+This project uses Laravel with the Blade templating engine for UI rendering and AdminLTE for the admin dashboard. It follows a clean architecture with a service-repository pattern to separate concerns across layers, ensuring code robustness, maintainability, and scalability.
+
 # Feature Covered
 
 -   Authentication and authorization
@@ -44,4 +48,62 @@ email : admin@mail.com
 
 password : admin_123
 
-# Screenshot
+# Screenshots
+
+## Vehicle Category
+
+![alt text](image-2.png)
+
+## Vehicle
+
+### Add Vehicle
+
+![alt text](images/add-vehicle.png)
+![alt text](images/success-add-vehicle.png)
+
+### List Vehicle
+
+![alt text](images/image-1.png)
+
+## Delivery
+
+### Error Assign Vehicle
+
+![alt text](images/image-3.png)
+
+### Add New Delivery Data
+
+![alt text](images/image-4.png)
+
+### Assign New Vehicle
+
+![alt text](images/image-5.png)
+
+### Deliver All Assigned Vehicle
+
+![alt text](images/image-6.png)
+
+### Track Delivery Progres
+
+![alt text](images/image-7.png)
+
+### Change Delivery Status
+
+![alt text](images/image-8.png)
+
+## Partner
+
+### Add New Partner
+
+![alt text](images/image-9.png)
+
+## Warehouse
+
+### Add New Spare Part
+
+![alt text](images/image-10.png)
+
+### Supply Spare Part
+
+![alt text](images/image-11.png)
+![alt text](images/image-12.png)
