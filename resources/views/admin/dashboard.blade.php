@@ -7,7 +7,7 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>{{30}}</h3>
+              <h3>{{$total_vehicles}}</h3>
 
               <p>Total Vehicles</p>
             </div>
@@ -22,7 +22,7 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>{{100}}</h3>
+              <h3>{{$total_deliveries}}</h3>
 
               <p>Total Deliveries</p>
             </div>
@@ -37,7 +37,7 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>{{10}}</h3>
+              <h3>{{$total_partners}}</h3>
 
               <p>Total Partners</p>
             </div>
@@ -52,7 +52,7 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>{{60}}</h3>
+              <h3>{{$total_employees}}</h3>
 
               <p>Total Employees</p>
             </div>

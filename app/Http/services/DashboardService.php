@@ -17,6 +17,10 @@ class DashboardService
         $this->dashboardRepository = $dashboardRepository;
     }
 
+    public function home(){
+        return $this->dashboardRepository->home();
+    }
+
     public function authenticate($data){
         $validator = Validator::make($data,[
             'email' => 'required|email',

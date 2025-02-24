@@ -21,7 +21,7 @@ class DashboardController extends Controller
             return redirect('/admin/login');
         }
         
-        return view("admin.dashboard");
+        return $this->dashboardService->home();
     }
 
     public function showLoginForm(){

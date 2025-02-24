@@ -94,6 +94,7 @@ class DeliveryRepository
 
     public function deliveryUpdateStatus($data,$id){
         $updateData = $this->vehicleDelivery::find($id);
+        // dd($updateData, $id);
         $updateData->delivery_status_id = $data['delivery_status_id'];
         $updateData->save();
 

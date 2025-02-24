@@ -33,39 +33,45 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($delivery->vehicleDeliveries as $dlv)
-                                    <tr>
-                                        <td>{{$dlv->id}}</td>
-                                        <td>{{$dlv->vehicle->name}}</td>
-                                        <td>{{$dlv->vehicle->number_plate}}</td>
-                                        <td>{{str_replace("_"," ",$dlv->status->name)}}</td>
-                                        <td>{{date('d-M-Y H:i:s', strtotime($dlv->created_at))}}</td>
-                                        <td>{{date('d-M-Y H:i:s', strtotime($dlv->updated_at))}}</td>
-                                        <td class="d-flex flex-row">
-                                            <button type="button" class="btn btn-info mx-2" data-toggle="modal" data-target="#myModal">Action</button>
-                                            <!-- Modal -->
-                                            <div id="myModal" class="modal fade" role="dialog">
-                                                <div class="modal-dialog">
+                            @foreach($delivery->vehicleDeliveries as $dlv)
+                                <tr>
+                                    <td>{{$dlv->id}}</td>
+                                    <td>{{$dlv->vehicle->name}}</td>
+                                    <td>{{$dlv->vehicle->number_plate}}</td>
+                                    <td>{{str_replace("_"," ",$dlv->status->name)}}</td>
+                                    <td>{{date('d-M-Y H:i:s', strtotime($dlv->created_at))}}</td>
+                                    <td>{{date('d-M-Y H:i:s', strtotime($dlv->updated_at))}}</td>
+                                    <td class="d-flex flex-row">
+                                        <!-- Generate a unique modal ID -->
+                                        @php
+                                            $modalId = "modal-".$dlv->id;
+                                        @endphp
 
-                                                    <!-- Modal content-->
-                                                    <div class="modal-content">
+                                        <!-- Action Button -->
+                                        <button type="button" class="btn btn-info mx-2" data-toggle="modal" data-target="#{{$modalId}}">
+                                            Action
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div id="{{$modalId}}" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h4 class="modal-title">Action Modal</h4>
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                        
                                                     </div>
                                                     <div class="modal-body">
                                                         <div>
-                                                            <p>Current Status : {{str_replace("_"," ",$dlv->status->name)}}</p>
+                                                            <p>Current Status: {{str_replace("_"," ",$dlv->status->name)}}</p>
                                                             <form method="POST" action="/admin/delivery/{{$delivery->id}}/vehicle-delivery/{{$dlv->id}}/status/update">
                                                                 @csrf
                                                                 <div class="form-group">
                                                                     <label for="delivery_status">Delivery Status</label>
                                                                     <select class="form-control select2" style="width: 100%;" name="delivery_status_id">
-                                                                    <option selected="selected">--Select Delivery Status--</option>
-                                                                    @foreach ($delivery_status as $ds)
-                                                                        <option value="{{$ds->id}}">{{str_replace("_"," ",$ds->name)}}</option>
-                                                                    @endforeach
+                                                                        <option selected="selected">--Select Delivery Status--</option>
+                                                                        @foreach ($delivery_status as $ds)
+                                                                            <option value="{{$ds->id}}">{{str_replace("_"," ",$ds->name)}}</option>
+                                                                        @endforeach
                                                                     </select>
                                                                 </div>
                                                                 <div>
@@ -81,13 +87,12 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                     </div>
-                                                    </div>
-
                                                 </div>
                                             </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     @endif
