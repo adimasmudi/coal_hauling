@@ -52,7 +52,7 @@ password : admin_123
 
 ## Vehicle Category
 
-![alt text](image-2.png)
+![alt text](images/image-2.png)
 
 ## Vehicle
 
